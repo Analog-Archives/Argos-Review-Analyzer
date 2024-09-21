@@ -1,11 +1,17 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+
+// components
+import SearchSection from "@/components/app/home/search-section/search-section";
 
 export default function Home() {
   return (
     <>
-      <h1>App Works</h1>
-      <Button>Test Button</Button>
+      {/* navbar */}
+
+      {/* search section */}
+      <SearchSection />
+
+      {/* disclaimer text */}
     </>
   );
 }
