@@ -1,0 +1,32 @@
+.wrapper {
+    color: white;
+    width: 500px;
+    /* border: 1px solid red; */
+    text-align: center;
+}
+
+.wrapper p {
+    text-align: center;
+}
+
+.wrapper input {
+    border: none !important;
+    background-color: #1F1F1F;
+    height: 45px;
+    margin-right: 5px;
+    border-radius: 8px;
+}
+
+.wrapper button {
+    border-radius: 8px;
+    background-color: red;
+    height: auto;
+    margin-left: 5px;
+}
+
+.wrapper a {
+    font-size: 13px;
+    opacity: .5;
+    font-weight: 300;
+    text-decoration: underline;
+}
