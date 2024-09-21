@@ -1,8 +1,8 @@
 .wrapper {
     color: white;
     width: 500px;
-    /* border: 1px solid red; */
     text-align: center;
+    margin-top: 100px;
 }
 
 .wrapper p {
@@ -19,7 +19,7 @@
 
 .wrapper button {
     border-radius: 8px;
-    background-color: red;
+    background-color: red !important;
     height: auto;
     margin-left: 5px;
 }
@@ -28,5 +28,7 @@
     font-size: 13px;
     opacity: .5;
     font-weight: 300;
+    color: white !important;
     text-decoration: underline;
+    
 }

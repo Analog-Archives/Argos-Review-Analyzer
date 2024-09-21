@@ -1,13 +1,14 @@
 .text {
     position: fixed;
-    bottom: 3%;
-    padding-left: 60px;
-    padding-right: 60px;
+    bottom: 2%;
+    transform: translateX(-50%);
+    left: 50%;
+    width: 80%;
     text-align: center;
-    color: rgb(135, 135, 135);
+    color: rgb(98, 98, 98);
     font-size: 12px;
-    font-weight: 400;
-    line-height: 1.8;
+    font-weight: 500;
+    line-height: 1.6;
 }   
 
 .text a {
