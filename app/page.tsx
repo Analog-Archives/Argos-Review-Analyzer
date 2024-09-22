@@ -13,9 +13,6 @@ import TopNavbar from "@/components/app/navbar/navbar";
 export default function Home() {
   return (
     <Container>
-      {/* navbar */}
-      <TopNavbar />
-
       {/* search section */}
       <SearchSection />
 
