@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 // stylesheet
 import Styles from './search-section.module.css'
+import ResultCard from '../result-card/result-card';
 
 const SearchSection: React.FC<{}> = () => {
     return (
@@ -19,9 +20,12 @@ const SearchSection: React.FC<{}> = () => {
                 marginBottom: 10
             }}>
                 <Input />
-                <Button>Search</Button>
+                <Button className={Styles.search_button}>Search</Button>
             </div>
             <a href="">How to get the product code ?</a>
+            
+            {/* quick result */}
+            <ResultCard title='GoPro HERO10 CHDHX-101-RW 4k Action Camera - Black' />
         </div>
     )
 }
