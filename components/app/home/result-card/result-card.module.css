@@ -1,0 +1,25 @@
+.wrapper {
+    color: white !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 12px;
+    width: 80%;
+    border: none !important;
+    background-color: #1F1F1F;
+}
+
+.button_1 {
+    color: black;
+    font-weight: 500;
+    background-color: white !important;
+    margin-right: 4px;
+}
+
+.button_2 {
+    color: white;
+    font-weight: 500;
+    background-color: green !important;
+    margin-left: 4px;
+}
