@@ -13,6 +13,7 @@ import { ResultCardProps } from '@/interfaces/Result-Card-Interface'
 
 // stylesheet
 import Styles from './result-card.module.css'
+import { useState } from 'react'
 
 const ResultCard: React.FC<ResultCardProps> = ({ title }) => {
     return (

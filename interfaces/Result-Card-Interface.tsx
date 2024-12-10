@@ -1,3 +1,4 @@
 export interface ResultCardProps {
-    title: string
+    title: string,
+    // display?: boolean
 }

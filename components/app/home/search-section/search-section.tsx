@@ -1,10 +1,8 @@
 "use client"
 import { useState } from 'react';
 
-// components
-import { Input } from '@/components/ui/input'
-
 // shad cn components
+import { Input } from '@/components/ui/input'
 import { Button } from "@/components/ui/button";
 
 import ResultCard from '../result-card/result-card';
@@ -14,30 +12,33 @@ import Styles from './search-section.module.css'
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const SearchSection: React.FC<{}> = () => {
-    const [inputValue, setInputValue] = useState<string>();
+    const [inputValue, setInputValue] = useState<string>(() => { return ("") });
+    const [productName, setProductName] = useState<string>("");
 
     const handleChange = (event: any) => {
+        console.log(event.target.value);
         setInputValue(event.target.value);
     }
 
-    const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+    // button click handle and API call
+    const API = 'https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/9509519?Limit=2&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true';
+    const handleSearchClick = async () => {
         try {
             const response = await fetch(API);
-            if (response.ok) {
-                const data = await response.json();
-                console.log(res.status(200).json(data));
-            }
-        } catch (error) {
-            console.log(res.status(500).json({ message: 'request failed' }));
-            throw new Error('Error occurred - ' + error);
-        }
-    }
+            const data = await response.json();
 
-    const API = 'https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/9509519?Limit=2&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true';
-    const handleSearchClick = async (value: any) => {
-        // logging
+            if (data) {
+                console.log(data.data.Results[0].OriginalProductName);    
+                const productName = data.data.Results[0].OriginalProductName;
+                setProductName(productName);
+
+                {/* quick result */}
+                // <ResultCard title={productName} />
+            }
         
-        console.log('clicked ! and the captured value is : ' + inputValue)
+        } catch (error) {
+            throw new Error("Somethng went wrong!");
+        }
     }
 
     return (
@@ -56,9 +57,6 @@ const SearchSection: React.FC<{}> = () => {
                     Search</Button>
             </div>
             <a href="">How to get the product code ?</a>
-
-            {/* quick result */}
-            {/* <ResultCard title='GoPro HERO10 CHDHX-101-RW 4k Action Camera - Black' /> */}
         </div>
     )
 }
