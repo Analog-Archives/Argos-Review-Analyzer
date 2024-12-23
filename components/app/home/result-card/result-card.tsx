@@ -18,10 +18,10 @@ import { useState } from 'react'
 const ResultCard: React.FC<ResultCardProps> = ({ title }) => {
     return (
         <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: 50
+            // display: 'flex',
+            // alignItems: 'center',
+            // justifyContent: 'center',
+            // marginTop: 50
         }}>
             <Card className={Styles.wrapper}>
                 <CardDescription

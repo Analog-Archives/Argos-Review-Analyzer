@@ -14,6 +14,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const SearchSection: React.FC<{}> = () => {
     const [inputValue, setInputValue] = useState<string>(() => { return ("") });
     const [productName, setProductName] = useState<string>("");
+    const [display, setDisplay] = useState<boolean>(false);
+
 
     const handleChange = (event: any) => {
         console.log(event.target.value);
@@ -27,17 +29,17 @@ const SearchSection: React.FC<{}> = () => {
             const response = await fetch(API);
             const data = await response.json();
 
+            console.log(data)
+
             if (data) {
-                console.log(data.data.Results[0].OriginalProductName);    
+                console.log(data.data.Results[0].OriginalProductName);
                 const productName = data.data.Results[0].OriginalProductName;
                 setProductName(productName);
-
-                {/* quick result */}
-                // <ResultCard title={productName} />
+                setDisplay(true);
             }
-        
+
         } catch (error) {
-            throw new Error("Somethng went wrong!");
+            throw new Error("Somethng went wrong!" + error);
         }
     }
 
@@ -56,6 +58,18 @@ const SearchSection: React.FC<{}> = () => {
                     className={Styles.search_button}>
                     Search</Button>
             </div>
+
+            {/* product confrimation overlay */}
+            {display ?
+                <div style={{ display: 'block' }}>
+                    <ResultCard title={productName} />
+                </div>
+                :
+                <div style={{ display: 'none' }}>
+                    <ResultCard title={productName} />
+                </div>
+            }
+
             <a href="">How to get the product code ?</a>
         </div>
     )
