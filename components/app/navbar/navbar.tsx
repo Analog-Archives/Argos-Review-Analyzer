@@ -18,7 +18,8 @@ const TopNavbar: React.FC<{}> = () => {
                         href="#home"
                         style={{
                             color: 'white',
-                            fontSize: 14
+                            fontSize: 14,
+                            fontFamily : 'Inter, sans-serif',
                         }}>Argos Review Analyzer</Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

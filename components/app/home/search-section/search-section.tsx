@@ -39,19 +39,29 @@ const SearchSection: React.FC<{}> = () => {
             }
 
         } catch (error) {
-            throw new Error("Somethng went wrong!" + error);
+            console.log(res.status(500).json({ message: 'request failed' }));
+            throw new Error('Error occurred - ' + error);
         }
     }
 
+    const API = 'https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/9509519?Limit=2&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true';
+    const handleSearchClick = async (value: any) => {
+        // logging
+
+        console.log('clicked ! and the captured value is : ' + inputValue)
+    }
+
     return (
-        <div className={`${Styles.wrapper} mx-auto d-block`}>
+        <div className={`${Styles.wrapper}`}>
             <p>Enter your product code here 👇</p>
+
             <div style={{
                 display: 'flex',
                 marginTop: 20,
                 marginBottom: 10
             }}>
-                <Input value={inputValue} onChange={handleChange} />
+                <div style={{ display: 'flex' }}> 
+                    <Input value={inputValue} onChange={handleChange} />
 
                 <Button
                     onClick={handleSearchClick}
