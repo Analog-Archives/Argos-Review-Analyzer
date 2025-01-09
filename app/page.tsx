@@ -1,7 +1,5 @@
 "use client"
 
-import Image from "next/image";
-
 // bootstrap components
 import Container from 'react-bootstrap/Container';
 
@@ -14,7 +12,15 @@ export default function Home() {
   return (
     <Container>
       {/* search section */}
-      <SearchSection />
+      <div style={{
+        border: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 70,
+      }}>
+        <SearchSection />
+      </div>
 
       {/* disclaimer text */}
       <DisclaimerText />

@@ -1,8 +1,10 @@
 .wrapper {
+    border: none;
     color: white;
     width: 500px;
     text-align: center;
-    margin-top: 70px;
+    display: grid;
+    justify-content: center;
 }
 
 .wrapper p {
@@ -13,11 +15,16 @@
     border: none !important;
     background-color: #1F1F1F;
     height: 45px;
+width: 320px;
     margin-right: 5px;
     border-radius: 8px;
 }
 
 .search_button {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border: none !important;
     border-radius: 8px;
     background-color: red !important;
     height: auto;
@@ -30,5 +37,5 @@
     font-weight: 300;
     color: white !important;
     text-decoration: underline;
-    
+
 }
