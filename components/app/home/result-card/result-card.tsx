@@ -42,7 +42,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ title }) => {
                     }}>
                     Is this your product ?</CardFooter>
 
-                <div style={{ marginTop: -5 }}>
+                <div style={{ marginTop: 22 }}>
                     <Button className={Styles.button_1}>No</Button>
                     <Button className={Styles.button_2}>Yes</Button>
                 </div>

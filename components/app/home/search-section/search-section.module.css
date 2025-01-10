@@ -15,7 +15,8 @@
     border: none !important;
     background-color: #1F1F1F;
     height: 45px;
-width: 320px;
+    width: 320px;
+    color: white;
     margin-right: 5px;
     border-radius: 8px;
 }
