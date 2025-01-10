@@ -1,12 +1,12 @@
 "use client"
 import { useState } from 'react';
 
-// components
-import { Input } from '@/components/ui/input'
-
 // shad cn components
 import { Button } from "@/components/ui/button";
+import { Input } from '@/components/ui/input'
 
+// components
+import ErrorMessage from '../result-card/ErrorMessage';
 import ResultCard from '../result-card/result-card';
 
 // stylesheet
@@ -15,6 +15,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const SearchSection: React.FC<{}> = () => {
     const [inputValue, setInputValue] = useState<string>('');
+    // const [productCode, setProductCode] = useState<string>('')
+    const [productName, setProductName] = useState<string>('')
+    const [isSearched, setIsSearched] = useState<boolean>(false);
 
     const handleChange = (event: any) => {
         setInputValue(event.target.value);
@@ -22,22 +25,34 @@ const SearchSection: React.FC<{}> = () => {
 
     const apiHandler = async () => {
         try {
-            const API = 'https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/9509519?Limit=2&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true';
+            const API = `https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/${inputValue}?Limit=2&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true`;
             const response = await fetch(API);
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
-                // console.log(res.status(200).json(data));
+                console.log(data.data.Results[0].OriginalProductName)
+                let product = data.data.Results[0].OriginalProductName;
+                if (product) {
+                    setProductName(product);
+                    setIsSearched(true);
+                }
             }
         } catch (error) {
-            // console.log(res.status(500).json({ message: 'request failed' }));
-            throw new Error('Error occurred - ' + error);
+            setProductName('');
+            setIsSearched(true);
+            console.log(`Error Occurred ${error}`)
         }
     }
 
     const handleSearchClick = async () => {
-        await apiHandler()
-        console.log('clicked ! and the captured value is : ' + inputValue)
+        if (inputValue.trim()) {
+            await apiHandler()
+            console.log('clicked ! and the captured value is : ' + inputValue)
+        }
+        else {
+            setProductName('');
+            setIsSearched(true);
+            console.log('Found an empty input value')
+        }
     }
 
     return (
@@ -49,7 +64,7 @@ const SearchSection: React.FC<{}> = () => {
                 marginTop: 20,
                 marginBottom: 10
             }}>
-                <div style={{ display: 'flex' }}> 
+                <div style={{ display: 'flex' }}>
                     <Input value={inputValue} onChange={handleChange} />
 
                     <Button
@@ -61,8 +76,12 @@ const SearchSection: React.FC<{}> = () => {
 
             <a href="">How to get the product code ?</a>
 
-            {/* quick result */}
-            <ResultCard title='GoPro HERO10 CHDHX-101-RW 4k Action Camera - Black' />
+            {/* confirmation */}
+            {productName ?
+                <ResultCard title={productName} />
+                :
+                (isSearched ? <ErrorMessage /> : " ")
+            }
         </div>
     )
 }
