@@ -1,4 +1,6 @@
 "use client"
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 // components
 import {
@@ -14,7 +16,16 @@ import { ResultCardProps } from '@/interfaces/Result-Card-Interface'
 // stylesheet
 import Styles from './result-card.module.css'
 
-const ResultCard: React.FC<ResultCardProps> = ({ title }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ title, reviews }) => {
+    const router = useRouter();
+
+    const handleClick = () => {
+        // injecting to the local storage
+        localStorage.setItem('reviews', JSON.stringify(reviews));
+        // sending user to the chat screen
+        router.push('/Chat');
+    }
+
     return (
         <div style={{
             display: 'flex',
@@ -44,7 +55,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ title }) => {
 
                 <div style={{ marginTop: 22 }}>
                     <Button className={Styles.button_1}>No</Button>
-                    <Button className={Styles.button_2}>Yes</Button>
+                    <Button onClick={handleClick} className={Styles.button_2}>Yes</Button>
                 </div>
             </Card>
         </div>

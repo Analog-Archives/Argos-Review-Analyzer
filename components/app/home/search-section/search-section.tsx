@@ -1,5 +1,6 @@
 "use client"
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 // shad cn components
 import { Button } from "@/components/ui/button";
@@ -15,9 +16,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const SearchSection: React.FC<{}> = () => {
     const [inputValue, setInputValue] = useState<string>('');
-    // const [productCode, setProductCode] = useState<string>('')
     const [productName, setProductName] = useState<string>('')
+    const [reviews, setReviews] = useState<string[]>([]);
     const [isSearched, setIsSearched] = useState<boolean>(false);
+
+    // routing instance
+    const router = useRouter();
 
     const handleChange = (event: any) => {
         setInputValue(event.target.value);
@@ -25,21 +29,57 @@ const SearchSection: React.FC<{}> = () => {
 
     const apiHandler = async () => {
         try {
-            const API = `https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/${inputValue}?Limit=2&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true`;
-            const response = await fetch(API);
+            let limit: number = 1;
+            const initialAPI = `https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/${inputValue}?Limit=${limit}&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true`;
+            const response = await fetch(initialAPI);
             if (response.ok) {
                 const data = await response.json();
+                // getting the product name
                 console.log(data.data.Results[0].OriginalProductName)
                 let product = data.data.Results[0].OriginalProductName;
                 if (product) {
                     setProductName(product);
                     setIsSearched(true);
                 }
+
+                // getting the review limit
+                let totalReviewCount: number = data.data.TotalResults;
+                console.log(`Total review count is - ${totalReviewCount}`)
+
+                totalReviewCount >= 100 ?
+                    limit = 100
+                    :
+                    limit = totalReviewCount;
+
+                // calling the secondary api handle
+                secondaryAPIHandler(limit)
             }
         } catch (error) {
             setProductName('');
             setIsSearched(true);
             console.log(`Error Occurred ${error}`)
+        }
+    }
+
+    const secondaryAPIHandler = async (reviewLimit: number) => {
+        let reviewsCollectorSnapshot: string[] = []
+
+        try {
+            const secondaryAPI = `https://www.argos.co.uk/product-api/bazaar-voice-reviews/partNumber/${inputValue}?Limit=${reviewLimit}&Offset=10&Sort=SubmissionTime%3ADesc&returnMeta=true`;
+            const response = await fetch(secondaryAPI);
+            const data = await response.json();
+
+            for (let i = 0; i < data.data.Results.length; i++) {
+                reviewsCollectorSnapshot.push(data.data.Results[i].ReviewText)
+            }
+            setReviews(reviewsCollectorSnapshot);
+
+            // debugging
+            console.log(`Length of the array - ${data.data.Results.length}`)
+            console.log(`Temp. collection -  ${reviewsCollectorSnapshot.length}`)
+
+        } catch (error) {
+            console.log(`Some error occured - ${error}`)
         }
     }
 
@@ -78,7 +118,7 @@ const SearchSection: React.FC<{}> = () => {
 
             {/* confirmation */}
             {productName ?
-                <ResultCard title={productName} />
+                <ResultCard reviews={reviews} title={productName} />
                 :
                 (isSearched ? <ErrorMessage /> : " ")
             }
