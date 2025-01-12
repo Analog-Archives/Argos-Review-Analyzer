@@ -1,3 +1,8 @@
 export interface ResultCardProps {
-    title: string
+    title: string,
+    reviews: string []
+}
+
+export interface ChatScreenProps {
+    reviews: string []
 }
