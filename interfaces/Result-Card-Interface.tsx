@@ -6,3 +6,8 @@ export interface ResultCardProps {
 export interface ChatScreenProps {
     reviews: string []
 }
+
+export interface SpeechBubbleProps {
+    role: string,
+    content: string
+}
