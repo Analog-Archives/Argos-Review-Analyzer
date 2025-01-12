@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Tooltip } from 'react-tooltip';
 
 // shad cn components
 import { Button } from "@/components/ui/button";
@@ -114,7 +115,11 @@ const SearchSection: React.FC<{}> = () => {
                 </div>
             </div>
 
-            <a href="">How to get the product code ?</a>
+            <a
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content="Hellow World"
+                href="">
+                How to get the product code ?</a>
 
             {/* confirmation */}
             {productName ?

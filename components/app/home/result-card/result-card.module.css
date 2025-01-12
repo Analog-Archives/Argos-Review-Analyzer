@@ -28,3 +28,29 @@
     background-color: green !important;
     margin-left: 4px;
 }
+
+/* error message stylings */
+.error_message_wrapper {
+    padding-top: 12px;
+    padding-bottom: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 10px;
+    background-color: rgb(38, 38, 38);
+    margin-top: 40px;
+}
+
+.error_message_wrapper p {
+    font-size: 15px;
+}
+
+.btn {
+    margin-top: 5px;
+    font-weight: 500;
+    border: none;
+    background-color: red !important;
+    color: white;
+    font-size: 14px;
+    height: 45px;
+    border-radius: 8px;
+}

@@ -1,10 +1,11 @@
 "use client"
 
+import Link from 'next/link';
+
 // components
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 // stylesheet
 import Styles from './navbar.module.css'
@@ -19,19 +20,23 @@ const TopNavbar: React.FC<{}> = () => {
                         style={{
                             color: 'white',
                             fontSize: 14,
-                            fontFamily : 'Inter, sans-serif',
+                            fontFamily: 'Inter, sans-serif',
                         }}>Argos Review Analyzer</Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link
+                            <Link
                                 className={Styles.nav_link}
-                                href="">Disclaimer</Nav.Link>
-                            <Nav.Link
+                                href="/disclaimer">
+                                Disclaimer
+                            </Link>
+                            <Link
                                 className={Styles.nav_link}
-                                href="">Contact</Nav.Link>
+                                href="/Contact">
+                                Contact
+                            </Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
