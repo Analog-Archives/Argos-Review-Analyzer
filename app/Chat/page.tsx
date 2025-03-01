@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 // interfaces
-import { ChatScreenProps } from "@/interfaces/Result-Card-Interface"
+// import { ChatScreenProps } from "@/interfaces/Result-Card-Interface"
 import { SpeechBubbleProps } from "@/interfaces/Result-Card-Interface"
 
 // stylesheet
@@ -36,7 +36,7 @@ let conversation: any[] = [
     },
 ];
 
-const Chat: React.FC<ChatScreenProps> = ({ reviews }) => {
+const Chat: React.FC = () => {
     const [data, setData] = useState<String[]>([])
     const [userQuestion, setUserQuestion] = useState<String>('')
     const [conversationState, setConversationState] = useState<SpeechBubbleProps[]>([])
